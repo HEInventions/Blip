@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Blip Test</title>
+        <style type="text/css"></style>
+        <script src="blip-0.0.1.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <h1>Blip Client</h1>
+        <p>Take a look in the console.</p>
+
+        <script type="text/javascript">
+
+            // Create blip client wrapper.
+            var ws = new WebSocket("ws://127.0.0.1:9224");
+            ws.onopen = function () {
+
+                // Now we have an active socket, start blip.
+                var blip = new Blip(ws);
+
+                // Subscribe to the Server.Settings topic. Pass in a callback.
+                blip.sub("Test.Settings", function (settings) {
+                    console.log("New settings: ");
+                    console.log(settings);
+                });
+
+                // Say hello.
+                blip.rpc("Test.Hello");
+
+                // Invoke the "Server.Increment" procedure, and call the callback when complete.
+                var arg = 26;
+                blip.rpc("Test.Increment", [arg], function (result) {
+                    console.log(arg + " + 1 = " + result);
+                });
+
+                // Invoke the "Server.ErrorWork" procedure with no arguments. Ignore success, and handle failure.
+                blip.rpc("Test.ThrowError", [],
+                    function (result) { },
+                    function (err) {
+                        console.log(err.Message + "\n" + err.Stacktrace);
+                    });
+            }
+
+        </script>
+    </body>
+</html>
