@@ -238,6 +238,8 @@ namespace Blip
             }
             catch (Exception e)
             {
+                var err = e.InnerException;
+                if (err != null) e = err;
                 responseJson = JsonConvert.SerializeObject(new BlipResponse() { Target = request.Call, Success = false, Result = new { Message = e.Message, Stacktrace = e.StackTrace} });
             }
 
