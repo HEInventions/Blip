@@ -1,4 +1,4 @@
-// Blip-0.0.1.js
+// Blip-0.0.2.js
 // Hardy & Ellis Inventions LTD.
 // 04-06-2015
 // 
@@ -29,7 +29,11 @@ var Blip = function (location) {
     this.__dispatch = function dispatch(handler, args) {
         if (handler === undefined) return;
         try {
-            handler.apply(null, [args]);
+            // If not an array, put in an array.
+            if (!(typeof args === "object" && args.length !== undefined))
+                args = [args];
+            // Dispatch.
+            handler.apply(null, args);
         }
         catch (err) {
             console.error("Blip: error invoking subscription handler");
@@ -57,7 +61,9 @@ var Blip = function (location) {
 
             // Get the handlers.
             var handlers = self.__dTopicsToHandlers[json.Topic];
-
+			if (handlers === undefined)
+				return;
+			
             // For each, apply arguments.
             for (var i = 0; i < handlers.length; ++i)
                 self.__dispatch(handlers[i], json.Arguments);
