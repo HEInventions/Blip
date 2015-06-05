@@ -5,6 +5,8 @@ If you want to have a JS application RPC on a C# server without WAMP / WCF / JSO
 
 A *JavaScript* client wrapper and *C#* server implementation are provided.
 
+![Blip](https://img.shields.io/badge/nuget-v0.0.1-blue.svg)
+
 #Client Usage:
 ```javascript
 // Create Blip client wrapper around a websocket.
