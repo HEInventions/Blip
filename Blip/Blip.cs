@@ -27,6 +27,11 @@ namespace Blip
         public virtual String Location { get { throw new NotImplementedException(); } }
 
         /// <summary>
+        /// Raised when Blip logs a warning message.
+        /// </summary>
+        public Action<Blip, String> LogWarning;
+
+        /// <summary>
         /// Create a new blip service.
         /// </summary>
         public Blip()
@@ -210,7 +215,8 @@ namespace Blip
             }
             catch (Exception e)
             {
-                Console.WriteLine("Dropped bad Blip request from " + client.ConnectionInfo.ClientIpAddress);
+                if (LogWarning != null)
+                    LogWarning(this, "Dropped bad Blip request from " + client.ConnectionInfo.ClientIpAddress);
                 return;
             }
 
@@ -218,7 +224,8 @@ namespace Blip
             Delegate target;
             if (!RegisteredServices.TryGetValue(request.Target, out target))
             {
-                Console.WriteLine("Missing RPC registered handler for target from " + client.ConnectionInfo.ClientIpAddress);
+                if (LogWarning!=null)
+                    LogWarning(this, "Missing RPC registered handler for target from " + client.ConnectionInfo.ClientIpAddress);
                 return;
             }
 
@@ -269,7 +276,8 @@ namespace Blip
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error sending data to " + client.ConnectionInfo.ClientIpAddress);
+                if (LogWarning!=null)
+                    LogWarning(this, "Error sending data to " + client.ConnectionInfo.ClientIpAddress);
                 return;
             }
         }
