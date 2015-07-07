@@ -69,7 +69,7 @@ namespace Blip.TestServer
         /// </summary>
         public void Error()
         {
-            throw new Exception("Some error");
+            throw new Exception("Intentional Test Error");
         }
     }
 }

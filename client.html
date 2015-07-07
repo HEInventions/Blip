@@ -19,9 +19,9 @@
                 var blip = new Blip(ws);
 
                 // Subscribe to the Server.Settings topic. Pass in a callback.
-                blip.sub("Test.Settings", function (settings) {
+                blip.sub("Test.Settings", function (num1, num2, array) {
                     console.log("New settings: ");
-                    console.log(settings);
+                    console.log(arguments);
                 });
 
                 // Say hello.
@@ -37,7 +37,7 @@
                 blip.rpc("Test.ThrowError", [],
                     function (result) { },
                     function (err) {
-                        console.log(err.Message + "\n" + err.Stacktrace);
+                        console.error(err.Message + "\n" + err.Stacktrace);
                     });
             }
 
