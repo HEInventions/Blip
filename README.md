@@ -17,7 +17,7 @@ ws.onopen = function () {
 	var blip = new Blip(ws);
 	
 	// Subscribe to the Server.Settings topic. Pass in a callback.
-	blip.sub("Test.Settings", function (settings) { console.log(settings); });
+	blip.sub("Test.Settings", function (a,b,list) { console.log(arguments); });
 	
 	// Say hello.
 	blip.rpc("Test.Hello");
@@ -28,7 +28,7 @@ ws.onopen = function () {
 	
 	// Invoke the "Server.ErrorWork" procedure with no arguments. Ignore success, and handle failure.
 	blip.rpc("Test.ThrowError", [], function (result) { },
-	function (err) { console.log(err.Message + "\n" + err.Stacktrace); });
+	function (err) { console.error(err.Message + "\n" + err.Stacktrace); });
 }
 ```
 
@@ -98,7 +98,7 @@ namespace Blip.TestServer
         /// </summary>
         public void Error()
         {
-            throw new Exception("Some error");
+            throw new Exception("Intentional Test Error");
         }
     }
 ```
