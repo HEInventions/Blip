@@ -189,7 +189,7 @@ namespace Blip
             if (function == null) throw new ArgumentNullException("RPC delegate cannot be null");
 
             // Check method does not contain Int32 or float parameters.
-            var args = function.GetMethodInfo().GetParameters();
+            var args = function.Method.GetParameters();
             var errors = args.Count(p => DisallowedTypes.Contains(p.ParameterType.FullName));
             if (errors > 0)
                 throw new Exception("BlipWebSocket cannot support parameters with type: " + String.Join(", ", DisallowedTypes.Select(t=>t.ToString())));

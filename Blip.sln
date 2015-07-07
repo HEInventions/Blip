@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blip", "Blip\Blip.csproj", "{C10CA4CB-0465-4A6E-B507-32F0A1629235}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blip.TestServer", "Blip.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blip.TestClient", "Blip.TestClient", "{2561E049-EA52-4FFB-ACC1-30C005F3609F}"
 	ProjectSection(SolutionItems) = preProject
-		blip-0.0.1.js = blip-0.0.1.js
+		blip-0.0.2.js = blip-0.0.2.js
 		client.html = client.html
 	EndProjectSection
 EndProject
